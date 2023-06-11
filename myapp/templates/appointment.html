@@ -1,0 +1,179 @@
+{% extends 'base.html' %} {% block body %}
+<div class="form my-5">
+  <h1 class="mb-5">Book your appointment</h1>
+  <form method="post" class="px-5">
+    {% csrf_token %}
+    <div class="form-row col-md-12">
+      <div class="form-group col-md-6">
+        <label for="">First Name</label>
+        <input
+          type="text"
+          name="firstname"
+          class="form-control"
+          id="inputEmail4"
+          placeholder="Your Name"
+          required
+        />
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="">Last Name</label>
+        <input
+          type="text"
+          name="lastname"
+          class="form-control"
+          id="inputEmail4"
+          placeholder="Your Surname"
+          required
+        />
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="">Age</label>
+        <input
+          type="text"
+          name="age"
+          class="form-control"
+          id="inputEmail4"
+          placeholder="Your Age"
+          required
+        />
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="">Contact No</label>
+        <input
+          type="text"
+          name="contact"
+          class="form-control"
+          id="inputEmail4"
+          placeholder="Your Name"
+          required
+        />
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputAddress">Address</label>
+        <input
+          type="text"
+          name="address"
+          class="form-control"
+          id="inputAddress"
+          placeholder="1234 Main St"
+          required
+        />
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputAddress2">Street</label>
+        <input
+          type="text"
+          name="street"
+          class="form-control"
+          id="inputAddress2"
+          placeholder="Apartment, studio, or floor"
+          required
+        />
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for=" inputState">Doctor</label>
+
+        <select class="form-select" name="doctor" id="cars">
+          {% for s in doctor %}
+
+          <option value="">{{s.name}} ({{s.speciality}})</option>
+          {% endfor %} {% comment %}
+          <option value="Urvi Patel">Urvi Patel</option>
+          <option value="Krishna Rafaliya">Krishna Rafaliya</option>
+          {% endcomment %}
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input
+          type="text"
+          name="city"
+          class="form-control"
+          id="inputCity"
+          required
+        />
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputZip">Pincode</label>
+        <input
+          type="text"
+          name="pincode"
+          class="form-control"
+          id="inputZip"
+          required
+        />
+      </div>
+
+      {% comment %}
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck" />
+          <label class="form-check-label" for="gridCheck"> Check me out </label>
+        </div>
+      </div>
+      {% endcomment %}
+
+      <div class="form-group mx-auto">
+        <button type="submit" class="btn btn-dark">
+          Book your appointment
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container my-5">
+  <table class="table bg-white rounded">
+    <thead>
+      <tr class="bg-dark text-white">
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Age</th>
+        <th>Contact</th>
+        <th>Address</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>Doctor</th>
+        <th>Pin-Code</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in ap %}
+      <tr>
+        <td class="align-middle">{{x.firstname}}</td>
+        <td class="align-middle">{{x.lastname}}</td>
+        <td class="align-middle">{{x.age}}</td>
+        <td class="align-middle">{{x.contact}}</td>
+        <td class="align-middle">{{x.address}}</td>
+        <td class="align-middle">{{x.street}}</td>
+        <td class="align-middle">{{x.city}}</td>
+        <td class="align-middle">{{x.doctor}}</td>
+        <td class="align-middle">{{x.pincode}}</td>
+        <td class="d-flex align-middle">
+          <a href=" /updateappointment/{{x.id}}/" class="btn btn-dark mr-2">
+            Edit Appointment
+          </a>
+          <form action="/deleteappointment/{{x.id}}/" method="post">
+            {% csrf_token %}
+            <input
+              type="submit"
+              class="btn btn-danger"
+              value="Delete Appointment"
+            />
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

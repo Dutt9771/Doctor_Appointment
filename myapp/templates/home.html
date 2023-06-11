@@ -1,0 +1,116 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block body %}
+
+<h1 class="mb-5">Welcome we are happy to help you</h1>
+
+  <style>
+    /* Thick black border */
+    hr.new4 {
+      border: 2px solid black;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      width: 300px;
+      height: 320px;
+      perspective: 1000px;
+      margin:20px 20px;
+      position: relative;
+    text-align:center;
+    font-size:18px;  
+
+    }
+
+    .flip-card-inner {
+      
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0px 0px 5px black, 0px 0px 7px black;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0px 0px 5px black, 0px 0px 7px black;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0px 0px 5px black, 0px 0px 7px black;
+    }
+
+    .flip-card-front {
+      
+      color: black;
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0px 0px 5px black, 0px 0px 7px black;
+    }
+
+    .flip-card-back {
+      background-color: #2980b9;
+      color: black;
+      transform: rotateY(180deg);
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0px 0px 5px black, 0px 0px 7px black;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      gap: 10px;
+      padding: 10px;
+    }
+  </style>
+  <div class="d-flex main">
+ <div class="grid-container">
+  {% for x in doctor %}
+
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img
+          style="height: 100%; width: 100%; border-radius: 20px 20px 20px 20px"
+          src="{{x.img.url}}"
+          class="card-img-top"
+          alt="..."
+          />
+        
+        </div>
+        <div class="flip-card-back">
+          <br>
+          <h3 class="card-title">{{x.name}}</h3>
+          <p class="card-text">{{x.speciality}}</p>
+          <br>
+        <p class="card-text"><img src="{% static 'location.gif' %}" style="width:40px;height:40px;">{{x.address}}</p>
+        <a href="{% url 'appointment'%}" class="btn btn-dark"
+          >Appointment Book</a
+        >
+      </div>
+      
+    </div>
+  </div>
+    {% endfor %}
+  </div>
+ </div>
+  {% endblock body %}
+</div>

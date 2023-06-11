@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+
+
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+<div class="form my-5 ">
+    <h1 class="mb-5">Login Page</h1>
+    <form action="" method="post" class="px-5">
+        {% csrf_token %}
+        <label for="">Username</label>
+        <input type="text" name="username" class="form-control"><br>
+
+        <label for="">Password</label>
+        <input type="password" name="password" class="form-control"><br>
+
+        <input type="submit" value="Login Now" class="btn btn-dark">
+    </form>
+</div>
+{% endblock body %}
